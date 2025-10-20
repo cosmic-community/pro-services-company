@@ -1,5 +1,5 @@
 import { createBucketClient } from '@cosmicjs/sdk'
-import type { Service, TeamMember, Testimonial, CaseStudy } from '@/types'
+import type { Service, TeamMember, Testimonial, CaseStudy, ContactSubmission } from '@/types'
 
 export const cosmic = createBucketClient({
   bucketSlug: process.env.COSMIC_BUCKET_SLUG as string,
@@ -129,5 +129,33 @@ export async function getCaseStudy(slug: string): Promise<CaseStudy | null> {
       return null
     }
     throw new Error('Failed to fetch case study')
+  }
+}
+
+// Create contact submission
+export async function createContactSubmission(data: {
+  name: string;
+  email: string;
+  company?: string;
+  phone?: string;
+  message: string;
+}): Promise<ContactSubmission> {
+  try {
+    const response = await cosmic.objects.insertOne({
+      title: `Contact from ${data.name}`,
+      type: 'contact-submissions',
+      metadata: {
+        name: data.name,
+        email: data.email,
+        company: data.company || '',
+        phone: data.phone || '',
+        message: data.message,
+        status: 'New'
+      }
+    })
+    
+    return response.object as ContactSubmission
+  } catch (error) {
+    throw new Error('Failed to create contact submission')
   }
 }

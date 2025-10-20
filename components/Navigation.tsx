@@ -11,6 +11,7 @@ export default function Navigation() {
     { href: '/team', label: 'Team' },
     { href: '/case-studies', label: 'Case Studies' },
     { href: '/testimonials', label: 'Testimonials' },
+    { href: '/contact', label: 'Contact' },
   ]
 
   return (

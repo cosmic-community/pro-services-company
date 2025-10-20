@@ -35,6 +35,11 @@ export default function Footer() {
                   Testimonials
                 </a>
               </li>
+              <li>
+                <a href="/contact" className="text-gray-400 hover:text-white transition-colors">
+                  Contact
+                </a>
+              </li>
             </ul>
           </div>
 

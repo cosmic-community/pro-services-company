@@ -81,6 +81,19 @@ export interface CaseStudy extends CosmicObject {
   };
 }
 
+// Contact Submission type
+export interface ContactSubmission extends CosmicObject {
+  type: 'contact-submissions';
+  metadata: {
+    name: string;
+    email: string;
+    company?: string;
+    phone?: string;
+    message: string;
+    status: 'New' | 'In Progress' | 'Resolved';
+  };
+}
+
 // API response types
 export interface CosmicResponse<T> {
   objects: T[];
@@ -102,4 +115,8 @@ export function isTestimonial(obj: CosmicObject): obj is Testimonial {
 
 export function isCaseStudy(obj: CosmicObject): obj is CaseStudy {
   return obj.type === 'case-studies';
+}
+
+export function isContactSubmission(obj: CosmicObject): obj is ContactSubmission {
+  return obj.type === 'contact-submissions';
 }
